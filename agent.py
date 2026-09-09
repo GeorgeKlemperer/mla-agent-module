@@ -1,5 +1,6 @@
 import anthropic
 import subprocess
+import sys
 from pathlib import Path
 
 client = anthropic.Anthropic()
@@ -114,10 +115,17 @@ def agent(prompt: str, max_turns: int = 10) -> str:
 
     raise RuntimeError(f"Agent did not terminate within {max_turns} turns")
 
-# agent("Add a docstring to the top of sample_project/calculator.py explaining what the module does.")
-# agent("Run the tests in sample_project/ and tell me what's failing.")
-# agent("Read sample_project/does_not_exist.py and summarise it.")
-agent("""
-The tests in sample_project/ are failing. Investigate what's wrong,
-fix the code, and re-run the tests to confirm everything passes.
-""")
+def main() -> int:
+    if len(sys.argv) < 2:
+        print('Usage: pipenv run python agent.py "your prompt here"')
+        return 1
+
+    prompt = " ".join(sys.argv[1:])
+    result = agent(prompt)
+    if result:
+        print(f"\n[result] {result}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

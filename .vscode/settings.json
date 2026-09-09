@@ -1,0 +1,4 @@
+{
+  "python.defaultInterpreterPath": "/Users/georgeklemperer/.local/share/virtualenvs/mlapprenticeship-xy5PBO5j/bin/python",
+  "python-envs.defaultEnvManager": "ms-python.python:pipenv"
+}
